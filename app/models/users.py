@@ -1,4 +1,4 @@
-from app import db
+from app.extensions import db
 
 # Create the database and the database tables
 
@@ -15,7 +15,8 @@ class User(db.Model):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'image': self.image
+            'image': self.image,
+            'password': self.password
             }
     def __init__(self,username,email,password,image):
         self.username = username

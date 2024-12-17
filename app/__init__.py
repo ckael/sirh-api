@@ -1,24 +1,16 @@
+# app/__init__.py
 from flask import Flask
-from mvc_flask import FlaskMVC
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_uploads import UploadSet, configure_uploads, IMAGES
+from app.extensions import db, migrate
+from app.routes import register_routes
 
-app = Flask(__name__)
-app.config.from_object("config.Config")
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('config.Config')
 
-# Initialisez les extensions
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+    # Initialiser les extensions
+    db.init_app(app)
+    migrate.init_app(app,db)
+    # Enregistrer les routes
+    register_routes(app)
 
-# Configuration des fichiers
-photos = UploadSet('photos', IMAGES)
-configure_uploads(app, photos)
-
-# Initialisation de FlaskMVC
-FlaskMVC(app)
-
-# Ajoutez la migration (si nécessaire)
-migrate.init_app(app, db)
-
-
+    return app
