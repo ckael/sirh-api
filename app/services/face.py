@@ -1,27 +1,28 @@
 import face_recognition
 
+def reconnaissance(img_path):
+    try :
 
-def compare_faces(image2_path):
-    try:
+        img = "app/public/img/pic2.jpg"
 
-        # Charger l'image avec PIL
-        image_base = face_recognition.load_image_file("../puclic/pic2.jpg")
-        image_test = face_recognition.load_image_file(image2_path)
-        print("success")
-        # Encoder les visages
-        encodings1 = face_recognition.face_encodings(image_base)[0]
-        encodings2 = face_recognition.face_encodings(image_test)[0]
-        print("success")
+        image = face_recognition.load_image_file(img)
 
-        # Comparer les visages (prend le premier visage détecté dans chaque image)
-        match = face_recognition.compare_faces([encodings1], encodings2)
-        distance = face_recognition.face_distance([encodings1], encodings2)[0]
+        img_to_recognize = face_recognition.load_image_file(img_path)
 
-        # Afficher le résultat
-        if match[0]:
-            print(f"Les visages correspondent avec une distance de {distance:.2f}")
+        # recherche et encodage
+        face_encodings = face_recognition.face_encodings(image)[0]
+
+        img_to_reconize_encodings = face_recognition.face_encodings(img_to_recognize)[0]
+
+        # creation fenetre resultat
+
+        compare = face_recognition.compare_faces([face_encodings], img_to_reconize_encodings)
+
+        if compare[0]:
+            label = True
         else:
-            print(f"Les visages ne correspondent pas. Distance : {distance:.2f}")
+            label = False
 
-    except Exception as e:
-        print(f"Erreur lors de la comparaison : {e}")
+        return label
+    except Exception as e :
+        print(f"Erreur lors du comparaison : {e}")

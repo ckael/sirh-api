@@ -33,3 +33,4 @@ def addUser():
             return jsonify({"error": "Fichier  manquants"}), 400
     else:
         return jsonify({"error": "Données manquantes"}), 400
+
