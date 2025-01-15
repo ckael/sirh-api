@@ -1,15 +1,15 @@
 import speech_recognition as sr
 
-def listen_and_recognize():
+def listen_and_recognize(audio):
     # Créer l'objet pour la reconnaissance vocale
     recognizer = sr.Recognizer()
 
     # Utiliser le micro pour capturer l'audio
-    with sr.Microphone() as source:
-        print("Attendez un moment, réglage du bruit ambiant...")
-        recognizer.adjust_for_ambient_noise(source)  # Ajustement du bruit ambiant
-        print("Parlez maintenant...")
-        audio = recognizer.listen(source)  # Enregistrer l'audio
+#    with sr.Microphone() as source:
+#        print("Attendez un moment, réglage du bruit ambiant...")
+#        recognizer.adjust_for_ambient_noise(source)  # Ajustement du bruit ambiant
+#        print("Parlez maintenant...")
+#        audio = recognizer.listen(source)  # Enregistrer l'audio
 
     try:
         # Reconnaissance vocale via Google Web Speech API
@@ -17,11 +17,10 @@ def listen_and_recognize():
         print(f"Vous avez dit : {command}")
         return command
     except sr.UnknownValueError:
-        print("Je n'ai pas compris ce que vous avez dit.")
-        return None
+        return "Je n'ai pas compris ce que vous avez dit."
     except sr.RequestError as e:
         print(f"Erreur avec le service de reconnaissance vocale : {e}")
-        return None
+        return e
 
-if __name__ == "__main__":
-    listen_and_recognize()
+#if __name__ == "__main__":
+#   listen_and_recognize()

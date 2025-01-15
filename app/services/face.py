@@ -1,7 +1,6 @@
 import face_recognition
 
 def reconnaissance(img_path):
-    try :
 
         img = "app/public/img/pic2.jpg"
 
@@ -22,7 +21,7 @@ def reconnaissance(img_path):
             label = True
         else:
             label = False
-
+        
         return label
-    except Exception as e :
-        print(f"Erreur lors du comparaison : {e}")
+        
+        
